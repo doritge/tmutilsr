@@ -15,3 +15,5 @@ Imports:
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
+URL: http://github.com/doritge/tmutilsr
+BugReports: http://github.com/doritge/tmutilsr/issues

@@ -360,12 +360,6 @@ usethis::use_package(&quot;readr&quot;, &quot;Suggests&quot;)</code></pre>
 #' @importFrom magrittr %&gt;%</code></pre>
 </div>
 </div>
-<div id="loading-and-building" class="section level2">
-<h2>Loading and building</h2>
-<p>Once you are finish deveopling the package you should load it to memory using the RStudio Build-&gt;Load All menu or the devtool function</p>
-<pre class="r"><code>devtools::load_all(&quot;C:/Users/Dorit Geifman/Documents/R projects/tmutilsr&quot;)</code></pre>
-<p>Note that you should always load pacakges that are not installed yet</p>
-</div>
 <div id="data" class="section level2">
 <h2>Data</h2>
 <p>If you want to save data as part of you package you do this by calling use_data(). The parameter is the name of the dataset and this will also be the name of the file. The saved dataset is an .rda file and is significanly compressesed (4.6. MB of LDA object was compressed to 417KB on disk).</p>
@@ -383,6 +377,15 @@ data(LDA_test)  # Needs to be called only for explicit load of function</code></
 <pre class="r"><code>usethis::use_testthat()  # Initialing the testing mechanism
 
 testthat::test_package(&quot;tmutilsr&quot;)</code></pre>
+</div>
+<div id="load-build-install" class="section level2">
+<h2>Load, build, install</h2>
+<p>There are several modes to work with the package:</p>
+<p>During the development process you should load it to memory using the RStudio Build-&gt;Load All menu or the devtool function</p>
+<pre class="r"><code>devtools::load_all(&quot;../tmutilsr&quot;)</code></pre>
+<p>Note that you should always load pacakges that are not installed yet</p>
+<p>You can generate a binary package that can be installed and then used as any other package. This is done by selecting the More-&gt;Build Binary Pacakge in the Build window of RStudio or alternatively user the devtools::build(binary = TRUE) function.</p>
+<p>Note that when creating a binary for windows you must have Winzip and Rtools installed</p>
 </div>
 </div>
 
