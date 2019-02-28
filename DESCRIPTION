@@ -1,0 +1,17 @@
+Package: tmutilsr
+Type: Package
+Title: Utility functions for topic modeling
+Version: 0.0.0.9000
+Authors@R: c(person("Dorit", "Geifman", email = "dorit.geifman@gmail.com", role = c("aut", "cre")))
+Description: Processing LDA objects into data frames or ggplot objects for further topic modling analysis
+License: 
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    magrittr,
+    tidytext,
+    topicmodels
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat
