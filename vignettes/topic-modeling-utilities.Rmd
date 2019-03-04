@@ -1,0 +1,29 @@
+---
+title: "Topic Modeling Utilities"
+author: "Dorit Geifman"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Topic Modeling Utilities}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+LAtent Dirichlet Allocation (LDA), is a text mining method used to identify latent topics and themes in a large corpus of text that consists of many documents. It uses a generative, unsupervised machine-learning algorithm that refines the semantic classification of a document beyond the rudimentary analysis of its raw terms. It produces a dual outcome: (1) a table of topics, each identified by the probability distribution of all the raw terms in the corpus, and (2) for each document, the estimated distribution of the topics running through them, i.e. the degree of which each topic is represented in the document.
+
+The [topicmodes R package](https://cran.r-project.org/web/packages/topicmodels/index.html) implements the LDA algorithm to produce the LDA_Gibbs object which includes the topic table with its beta distribution of terms and the document with gamma values that represent distribution of topics running through them.
+
+Package tmutilsr provides utilities for handling the topic table and the document table
+
+# Topic-term table utilities
+
+# Document-topic table utilities
+
+

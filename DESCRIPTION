@@ -10,10 +10,14 @@ LazyData: true
 Imports:
     dplyr,
     magrittr,
+    rlang,
     tidytext,
     topicmodels
 RoxygenNote: 6.1.1
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 URL: http://github.com/doritge/tmutilsr
 BugReports: http://github.com/doritge/tmutilsr/issues
+VignetteBuilder: knitr
