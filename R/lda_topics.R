@@ -48,7 +48,8 @@ lda_trim_beta <- function(lda, n_terms = 20, topics = NULL){
 #' @return a table that spreads for each topic a column of terms and their
 #'   associated beta
 #'
-#' @importFrom purrr map
+#' @importFrom stringr str_c
+#' @importFrom purrr map reduce
 #' @importFrom rlang %@%
 #'
 #' @export
@@ -66,7 +67,7 @@ lda_table_topics <- function(lda, n_terms = 20, topics = NULL, beta = TRUE){
         topic_nums <- topics
 
     topics_table <- lda %>%
-        lda_trim(n_terms, topics) %>%
+        lda_trim_beta(n_terms, topics) %>%
         split(.$topic) %>%
         map(`[`, cols) %>%
         reduce(cbind)

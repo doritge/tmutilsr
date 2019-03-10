@@ -12,9 +12,11 @@ functions
 \details{
 Topic modeling utilities (base package `topicmodels`):
 
-\itemize{ \item `lda_trim_beta` - trims LDA beta table by terms and/or topics
+\itemize{
+\item `lda_trim_beta` - trims LDA beta table by terms and/or topics
 \item `lda_table_topics` - spreads the term distribution over topics by topic
-columns \item `lda_list_docs` - lists documents by their lead topic }
+\item `lda_list_docs` - lists documents by their lead topic
+}
 }
 \seealso{
 Useful links:

@@ -59,7 +59,9 @@ LDA_test <- read_rds("../VR rehabilitation/LDA_filtered_all_10.rds")
 aa<-lda_trim_corpus(LDA_test, n_docs = 5, n_ranks = 2, topics = c(1,5,10))
 aa <- lda_trim(LDA_test, n_terms = 10, topics = c(1,5,10))
 aa <- lda_table_topics(LDA_test, n_terms = 10, beta = FALSE)
+aa <- lda_list_docs(LDA_test, n_ranks = 2, n_docs = 2, topics = c(1,5,10))
 
+nrow(lda_list_docs(LDA_test, topics = c(1,5,10)))
 
-
+ncol(lda_list_docs(LDA_test, n_ranks = 2))
 ####
