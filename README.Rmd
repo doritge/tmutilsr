@@ -22,6 +22,9 @@ tmutilsr is a text-mining utility package that extends basic R text mining packa
 * `lda_table_topics` - spreads the term distribution over topics by topic
 * `lda_list_docs` - lists documents by their lead topic
 
+**URL scraping utilities
+
+* `scrape_text` - scrapes text of a specific node tag in a given URL
 ## Installation
 
 The package is currently not availabel on CRAN

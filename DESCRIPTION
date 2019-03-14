@@ -12,7 +12,8 @@ Imports:
     magrittr,
     rlang,
     tidytext,
-    topicmodels
+    topicmodels,
+    rvest
 RoxygenNote: 6.1.1
 Suggests: 
     testthat,
