@@ -5,31 +5,27 @@
 #' `topicmodels::LDA()`. Optionally, lower ranking topics per document are also
 #' displayed
 #'
-#' @param lda LDA_ object
-#' @param n_ranks Number of topic ranks to display (<=k)
-#' @param n_docs Number of returned documents per highest ranking topic. Default
-#'   all
-#' @param topics A list of topic numbers to display
+#' @param lda LDA object
+#' @param n_ranks Number of topic ranks to display (<=k). Default 1
+#' @param n_docs Number of returned documents per lead topic. Default all
+#' @param topics A list of topic numbers to be displayed
 #'
-#' @return A list of n_docs documents per main topic, each associated with
+#' @return A list of n_docs documents per lead topic, each associated with
 #'   n_ranks topic and their gamma
 #'
 #' @import tidytext
 #' @import topicmodels
 #'
-#' @importFrom magrittr %>%
-#' @importFrom rlang %@%
-#'
 #' @export
 lda_list_docs <- function(lda, n_ranks = 1, n_docs = 0, topics = NULL){
     # List documents by lead topic
 
-    k <- lda %@% k
+    k <- 1:attr(lda, "k")
     docs_table <- tibble(document = lda %@% documents)
 
     if(n_ranks > k) n_ranks <- k
 
-    lda_table <- LDA_test %>%
+    lda_table <- lda %>%
         tidy(matrix = "gamma") %>%
         arrange(document, -gamma) %>%
         group_by(document)

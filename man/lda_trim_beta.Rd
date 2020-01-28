@@ -7,17 +7,17 @@
 lda_trim_beta(lda, n_terms = 20, topics = NULL)
 }
 \arguments{
-\item{lda}{LDA_ object}
+\item{lda}{LDA object}
 
-\item{n_terms}{Number of highest ranking terms per topic to display}
+\item{n_terms}{Number of highest ranking terms per topic to display. Default 20}
 
-\item{topics}{A list of topic numbers to display}
+\item{topics}{A list of topic numbers to return}
 }
 \value{
-a data frame of highest ranking terms per topic and their beta values
+a tibble of highest ranking terms per topic and their beta values
 }
 \description{
-A topic modeling utility. Trims the beta table of the LDA_
+A topic modeling utility. Trims the beta table of the LDA
   object resulting from `topicmodels::LDA()` by the requested number of
   highest ranking terms and / or topics
 }

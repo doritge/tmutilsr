@@ -1,20 +1,5 @@
 
-# library(readr)
-library(tmutilsr)
-library(tidytext)
-library(magrittr)
-# library(tidyr)
-library(topicmodels)
-
-
-####
-
-library(dplyr)
-library(purrr)
-library(stringr)
-#library(tidyr)
-library(rlang)
-library(readr)
+library(tidyverse)
 library(tidytext)
 library(topicmodels)
 
@@ -65,3 +50,61 @@ nrow(lda_list_docs(LDA_test, topics = c(1,5,10)))
 
 ncol(lda_list_docs(LDA_test, n_ranks = 2))
 ####
+documents <- read_csv("../ICVRplus proj/output/icvrp_filtered_docs.csv",
+                          col_types = cols(document = col_character())) %>%
+    filter(row_number() <= 1000)
+
+my_stopwords <- read_csv("../TM examples/data/aux_data/project_stopwords_stm.csv")
+
+tm_make_corpus <- function(documents, custom_sw = NULL, stem2readable = TRUE){
+    corpus <- documents %>%
+        select(document, text) %>%
+        unnest_tokens(word, text) %>%
+        anti_join(stop_words)
+
+    if(!is.null(custom_sw))
+        corpus <- anti_join(corpus, custom_sw)
+
+    corpus <- corpus %>%
+        filter(str_detect(word, "\\d", negate = TRUE)) %>% # remove words with numbers
+        mutate(word = str_replace(word, "[^[:alnum:]]", "")) %>% # remove other non-alphanumeric characters
+        mutate(stem = SnowballC::wordStem(word))
+
+    if(stem2readable)
+        corpus <- tm_stem2readable(corpus)
+
+    corpus
+}
+
+aa <- tm_make_corpus(documents, stem2readable = FALSE)
+cc <- tm_stem2readable(aa)
+
+bb <- tm_make_corpus(documents, custom_sw = my_stopwords)
+tm_stem2readable <- function(corpus){
+    # mapp stemmed word to a readable word (by taking most frequent word)
+    word_stem <- corpus %>%
+        select(word, stem)
+
+    mapping <- corpus %>%
+        count(word, sort = TRUE) %>%
+        left_join(word_stem) %>%
+        group_by(stem) %>%
+        arrange(-n) %>%
+        filter(row_number() == 1) %>%
+        ungroup()
+
+    stem2read <- mapping$word
+    names(stem2read) <- mapping$stem
+
+    corpus <- corpus %>%
+        mutate(stem = stem2read[stem])
+}
+bb <- tm_stem2readable(aa)
+
+importFrom(magrittr,"%>%")
+importFrom(purrr,map)
+importFrom(purrr,reduce)
+importFrom(rlang,"%@%")
+importFrom(stringr,str_c)
+
+#' @importFrom rlang "%@%"

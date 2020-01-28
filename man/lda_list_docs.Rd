@@ -7,17 +7,16 @@
 lda_list_docs(lda, n_ranks = 1, n_docs = 0, topics = NULL)
 }
 \arguments{
-\item{lda}{LDA_ object}
+\item{lda}{LDA object}
 
-\item{n_ranks}{Number of topic ranks to display (<=k)}
+\item{n_ranks}{Number of topic ranks to display (<=k). Default 1}
 
-\item{n_docs}{Number of returned documents per highest ranking topic. Default
-all}
+\item{n_docs}{Number of returned documents per lead topic. Default all}
 
-\item{topics}{A list of topic numbers to display}
+\item{topics}{A list of topic numbers to be displayed}
 }
 \value{
-A list of n_docs documents per main topic, each associated with
+A list of n_docs documents per lead topic, each associated with
   n_ranks topic and their gamma
 }
 \description{

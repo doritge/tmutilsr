@@ -7,20 +7,21 @@
 lda_table_topics(lda, n_terms = 20, topics = NULL, beta = TRUE)
 }
 \arguments{
-\item{lda}{LDA_ object}
+\item{lda}{LDA object}
 
 \item{n_terms}{Number of highest ranking terms per topic to display}
 
-\item{topics}{A list of topic numbers to display}
+\item{topics}{A list of topic numbers to display. Optional butfFor stm objects
+must be provided}
 
-\item{beta}{retrun beta values? default all}
+\item{beta}{return beta values? default yes}
 }
 \value{
 a table that spreads for each topic a column of terms and their
   associated beta
 }
 \description{
-A topic modeling utility. Spreads the beta table of the LDA_
+A topic modeling utility. Spreads the beta table of the LDA
   object resulting from `topicmodels::LDA()` into the higest ranking terms
   and their beta values in columns per topic. The number of requested terms
   and topics can be specified as well as whether to display the beta's

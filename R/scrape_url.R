@@ -10,8 +10,6 @@
 #'
 #' @import rvest
 #'
-#' @importFrom magrittr %>%
-#'
 #' @export
 scrape_text <- function(url, tag){
     nodes <- xml2::read_html(url) %>%

@@ -1,25 +1,23 @@
 #' Trim LDA beta table by terms and/or topics
 #'
-#' @description A topic modeling utility. Trims the beta table of the LDA_
+#' @description A topic modeling utility. Trims the beta table of the LDA
 #'   object resulting from `topicmodels::LDA()` by the requested number of
 #'   highest ranking terms and / or topics
 #'
-#' @param lda LDA_ object
-#' @param n_terms Number of highest ranking terms per topic to display
-#' @param topics A list of topic numbers to display
+#' @param lda LDA object
+#' @param n_terms Number of highest ranking terms per topic to display. Default 20
+#' @param topics A list of topic numbers to return
 #'
-#' @return a data frame of highest ranking terms per topic and their beta values
+#' @return a tibble of highest ranking terms per topic and their beta values
 #'
 #' @import tidytext
 #' @import topicmodels
-#'
-#' @importFrom magrittr %>%
 #'
 #' @export
 lda_trim_beta <- function(lda, n_terms = 20, topics = NULL){
     # Trim beta table by number of terms and number of topics
 
-    topic_terms <- LDA_test %>%
+    topic_terms <- lda %>%
         tidy() %>%
         arrange(topic, -beta) %>%
         group_by(topic) %>%
@@ -35,22 +33,19 @@ lda_trim_beta <- function(lda, n_terms = 20, topics = NULL){
 
 #' Spread the term distribution over topics by topic columns
 #'
-#' @description A topic modeling utility. Spreads the beta table of the LDA_
+#' @description A topic modeling utility. Spreads the beta table of the LDA
 #'   object resulting from `topicmodels::LDA()` into the higest ranking terms
 #'   and their beta values in columns per topic. The number of requested terms
 #'   and topics can be specified as well as whether to display the beta's
 #'
-#' @param lda LDA_ object
+#' @param lda LDA object
 #' @param n_terms Number of highest ranking terms per topic to display
-#' @param topics A list of topic numbers to display
-#' @param beta retrun beta values? default all
+#' @param topics A list of topic numbers to display. Optional butfFor stm objects
+#'   must be provided
+#' @param beta return beta values? default yes
 #'
 #' @return a table that spreads for each topic a column of terms and their
 #'   associated beta
-#'
-#' @importFrom stringr str_c
-#' @importFrom purrr map reduce
-#' @importFrom rlang %@%
 #'
 #' @export
 lda_table_topics <- function(lda, n_terms = 20, topics = NULL, beta = TRUE){
@@ -62,7 +57,7 @@ lda_table_topics <- function(lda, n_terms = 20, topics = NULL, beta = TRUE){
         cols <- c("term")
 
     if(is.null(topics))
-        topic_nums <- 1:(lda %@% k)
+        topic_nums <- 1:attr(lda, "k")
     else
         topic_nums <- topics
 
