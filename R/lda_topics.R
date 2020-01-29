@@ -56,9 +56,13 @@ lda_table_topics <- function(lda, n_terms = 20, topics = NULL, beta = TRUE){
     else
         cols <- c("term")
 
-    if(is.null(topics))
-        topic_nums <- 1:attr(lda, "k")
-    else
+    if(is.null(topics)){
+        if(class(lda)[1] == "LDA_Gibbs")
+            topic_nums <- 1:attr(lda, "k")
+        else
+            if(class(lda)[1] == "STM")
+                topic_nums <- 1:lda$settings$dim$K
+    }else
         topic_nums <- topics
 
     topics_table <- lda %>%

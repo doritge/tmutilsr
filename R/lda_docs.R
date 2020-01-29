@@ -20,8 +20,15 @@
 lda_list_docs <- function(lda, n_ranks = 1, n_docs = 0, topics = NULL){
     # List documents by lead topic
 
-    k <- 1:attr(lda, "k")
-    docs_table <- tibble(document = lda %@% documents)
+    if(class(lda)[1] == "LDA_Gibbs"){
+        k <- attr(lda, "k")
+        docs_table <- tibble(document = attr(lda, "documents"))
+    }else{
+        if(class(lda)[1] == "STM"){
+            k <- lda$settings$dim$K
+            docs_table <- tibble(document = 1:lda$settings$dim$N)
+        }
+    }
 
     if(n_ranks > k) n_ranks <- k
 
